@@ -8,13 +8,18 @@ const App = () =>  {
   const [walletAddress, setWallet] = useState('')
 
   const connectWalletPressed = async () => {
-      if(isConnected) return alert("Metamask já conectada!")
+      if(isConnected) return alert(
+        "Conta já conectada! " +
+        String(walletAddress).substring(0, 5) +
+        "..." +
+        String(walletAddress).substring(38)
+      )
+      
       const walletResponse = await connectWallet()
       setConnectedStatus(walletResponse.connectedStatus)
       setStatus(walletResponse.status)
-      if(isConnected) {
-          setWallet(walletResponse.address)
-      }
+      setWallet(walletResponse.address)
+      
   }
 
   const connectWallet = async () => {
